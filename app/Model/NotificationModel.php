@@ -5,7 +5,6 @@ namespace Kanboard\Model;
 use Kanboard\Core\Base;
 use Kanboard\EventBuilder\CommentEventBuilder;
 use Kanboard\EventBuilder\EventIteratorBuilder;
-use Kanboard\EventBuilder\SubtaskEventBuilder;
 use Kanboard\EventBuilder\TaskEventBuilder;
 use Kanboard\EventBuilder\TaskFileEventBuilder;
 use Kanboard\EventBuilder\TaskLinkEventBuilder;
@@ -90,7 +89,6 @@ class NotificationModel extends Base
         $iterator
             ->withBuilder(TaskEventBuilder::getInstance($this->container))
             ->withBuilder(CommentEventBuilder::getInstance($this->container))
-            ->withBuilder(SubtaskEventBuilder::getInstance($this->container))
             ->withBuilder(TaskFileEventBuilder::getInstance($this->container))
             ->withBuilder(TaskLinkEventBuilder::getInstance($this->container))
         ;

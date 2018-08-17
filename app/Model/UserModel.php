@@ -323,11 +323,6 @@ class UserModel extends Base
                 return false;
             }
 
-            // All assigned subtasks are now unassigned (no foreign key)
-            if (! $db->table(SubtaskModel::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
-                return false;
-            }
-
             // All comments are not assigned anymore (no foreign key)
             if (! $db->table(CommentModel::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
                 return false;

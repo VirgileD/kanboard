@@ -35,7 +35,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('dashboard/:user_id', 'DashboardController', 'show');
             $container['route']->addRoute('dashboard/:user_id/projects', 'DashboardController', 'projects');
             $container['route']->addRoute('dashboard/:user_id/tasks', 'DashboardController', 'tasks');
-            $container['route']->addRoute('dashboard/:user_id/subtasks', 'DashboardController', 'subtasks');
             $container['route']->addRoute('dashboard/:user_id/activity', 'DashboardController', 'activity');
             $container['route']->addRoute('dashboard/:user_id/notifications', 'DashboardController', 'notifications');
 
@@ -100,7 +99,6 @@ class RouteProvider implements ServiceProviderInterface
 
             // Exports
             $container['route']->addRoute('export/tasks/:project_id', 'ExportController', 'tasks');
-            $container['route']->addRoute('export/subtasks/:project_id', 'ExportController', 'subtasks');
             $container['route']->addRoute('export/transitions/:project_id', 'ExportController', 'transitions');
             $container['route']->addRoute('export/summary/:project_id', 'ExportController', 'summary');
 

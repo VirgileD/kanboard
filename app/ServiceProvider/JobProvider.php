@@ -6,7 +6,6 @@ use Kanboard\Job\CommentEventJob;
 use Kanboard\Job\NotificationJob;
 use Kanboard\Job\ProjectFileEventJob;
 use Kanboard\Job\ProjectMetricJob;
-use Kanboard\Job\SubtaskEventJob;
 use Kanboard\Job\TaskEventJob;
 use Kanboard\Job\TaskFileEventJob;
 use Kanboard\Job\TaskLinkEventJob;
@@ -35,9 +34,6 @@ class JobProvider implements ServiceProviderInterface
             return new CommentEventJob($c);
         });
 
-        $container['subtaskEventJob'] = $container->factory(function ($c) {
-            return new SubtaskEventJob($c);
-        });
 
         $container['taskEventJob'] = $container->factory(function ($c) {
             return new TaskEventJob($c);

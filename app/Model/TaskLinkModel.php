@@ -109,7 +109,7 @@ class TaskLinkModel extends Base
                         TaskModel::TABLE.'.date_completed',
                         TaskModel::TABLE.'.date_started',
                         TaskModel::TABLE.'.date_due',
-                        TaskModel::TABLE.'.time_spent AS task_time_spent',
+                        '(SELECT SUM(time_spent) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS time_spent',
                         TaskModel::TABLE.'.time_estimated AS task_time_estimated',
                         TaskModel::TABLE.'.owner_id AS task_assignee_id',
                         UserModel::TABLE.'.username AS task_assignee_username',

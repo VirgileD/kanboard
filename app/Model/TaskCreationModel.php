@@ -64,7 +64,7 @@ class TaskCreationModel extends Base
         $values = $this->dateParser->convert($values, array('date_started'), true);
 
         $this->helper->model->removeFields($values, array('another_task', 'duplicate_multiple_projects'));
-        $this->helper->model->resetFields($values, array('creator_id', 'owner_id', 'date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
+        $this->helper->model->resetFields($values, array('creator_id', 'owner_id', 'date_due', 'date_started', 'score', 'category_id', 'time_estimated'));
 
         if (empty($values['column_id'])) {
             $values['column_id'] = $this->columnModel->getFirstColumnId($values['project_id']);

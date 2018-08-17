@@ -152,21 +152,6 @@ abstract class BaseController extends Base
         return $user;
     }
 
-    protected function getSubtask(array $task)
-    {
-        $subtask = $this->subtaskModel->getById($this->request->getIntegerParam('subtask_id'));
-
-        if (empty($subtask)) {
-            throw new PageNotFoundException();
-        }
-
-        if ($subtask['task_id'] != $task['id']) {
-            throw new AccessForbiddenException();
-        }
-
-        return $subtask;
-    }
-
     protected function getComment(array $task)
     {
         $comment = $this->commentModel->getById($this->request->getIntegerParam('comment_id'));
@@ -305,7 +290,7 @@ abstract class BaseController extends Base
 
         return $filter;
     }
-    
+
     /**
      * Redirect the user after the authentication
      *

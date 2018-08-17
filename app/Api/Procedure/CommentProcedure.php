@@ -34,11 +34,12 @@ class CommentProcedure extends BaseProcedure
     public function createComment($task_id, $user_id, $content, $reference = '')
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'createComment', $task_id);
-        
+
         $values = array(
             'task_id' => $task_id,
             'user_id' => $user_id,
             'comment' => $content,
+            'time_spent' => $time_spent,
             'reference' => $reference,
         );
 
@@ -50,10 +51,11 @@ class CommentProcedure extends BaseProcedure
     public function updateComment($id, $content)
     {
         CommentAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateComment', $id);
-        
+
         $values = array(
             'id' => $id,
             'comment' => $content,
+            'time_spent' => $time_spent
         );
 
         list($valid, ) = $this->commentValidator->validateModification($values);

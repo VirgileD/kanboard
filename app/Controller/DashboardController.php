@@ -44,23 +44,6 @@ class DashboardController extends BaseController
     }
 
     /**
-     * My subtasks
-     *
-     * @access public
-     */
-    public function subtasks()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/subtasks', array(
-            'title' => t('Subtasks overview for %s', $this->helper->user->getFullname($user)),
-            'paginator' => $this->subtaskPagination->getDashboardPaginator($user['id']),
-            'user' => $user,
-            'nb_subtasks' => $this->subtaskModel->countByAssigneeAndTaskStatus($user['id']),
-        )));
-    }
-
-    /**
      * My projects
      *
      * @access public

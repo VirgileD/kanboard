@@ -41,20 +41,6 @@ class BoardTooltipController extends BaseController
     }
 
     /**
-     * Get subtasks on mouseover
-     *
-     * @access public
-     */
-    public function subtasks()
-    {
-        $task = $this->getTask();
-        $this->response->html($this->template->render('board/tooltip_subtasks', array(
-            'subtasks' => $this->subtaskModel->getAll($task['id']),
-            'task' => $task,
-        )));
-    }
-
-    /**
      * Display all attachments during the task mouseover
      *
      * @access public

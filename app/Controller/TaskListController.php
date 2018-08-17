@@ -23,17 +23,7 @@ class TaskListController extends BaseController
         $project = $this->getProject();
         $search = $this->helper->projectHeader->getSearchQuery($project);
 
-        if ($this->request->getIntegerParam('show_subtasks')) {
-            session_set('subtaskListToggle', true);
-        } elseif ($this->request->getIntegerParam('hide_subtasks')) {
-            session_set('subtaskListToggle', false);
-        }
-
-        if ($this->userSession->hasSubtaskListActivated()) {
-            $formatter = $this->taskListSubtaskFormatter;
-        } else {
-            $formatter = $this->taskListFormatter;
-        }
+        $formatter = $this->taskListFormatter;
 
         $paginator = $this->paginator
             ->setUrl('TaskListController', 'show', array('project_id' => $project['id']))

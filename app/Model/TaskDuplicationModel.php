@@ -130,7 +130,7 @@ class TaskDuplicationModel extends Base
     }
 
     /**
-     * Create the new task and duplicate subtasks
+     * Create the new task
      *
      * @access protected
      * @param  integer            $task_id      Task id
@@ -140,10 +140,6 @@ class TaskDuplicationModel extends Base
     protected function save($task_id, array $values)
     {
         $new_task_id = $this->taskCreationModel->create($values);
-
-        if ($new_task_id !== false) {
-            $this->subtaskModel->duplicate($task_id, $new_task_id);
-        }
 
         return $new_task_id;
     }

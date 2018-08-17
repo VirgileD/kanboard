@@ -36,7 +36,7 @@ class TaskFinderModel extends Base
                         TaskModel::TABLE.'.project_id',
                         TaskModel::TABLE.'.color_id',
                         TaskModel::TABLE.'.priority',
-                        TaskModel::TABLE.'.time_spent',
+                        '(SELECT SUM(time_spent) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS time_spent',
                         TaskModel::TABLE.'.time_estimated',
                         ProjectModel::TABLE.'.name AS project_name',
                         ColumnModel::TABLE.'.title AS column_name',
@@ -62,7 +62,6 @@ class TaskFinderModel extends Base
         return $this->getExtendedQuery()
                     ->beginOr()
                     ->eq(TaskModel::TABLE.'.owner_id', $user_id)
-                    ->addCondition(TaskModel::TABLE.".id IN (SELECT task_id FROM ".SubtaskModel::TABLE." WHERE ".SubtaskModel::TABLE.".user_id='$user_id')")
                     ->closeOr()
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
                     ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
@@ -81,9 +80,8 @@ class TaskFinderModel extends Base
             ->table(TaskModel::TABLE)
             ->columns(
                 '(SELECT COUNT(*) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
+                '(SELECT SUM(time_spent) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS time_spent',
                 '(SELECT COUNT(*) FROM '.TaskFileModel::TABLE.' WHERE task_id=tasks.id) AS nb_files',
-                '(SELECT COUNT(*) FROM '.SubtaskModel::TABLE.' WHERE '.SubtaskModel::TABLE.'.task_id=tasks.id) AS nb_subtasks',
-                '(SELECT COUNT(*) FROM '.SubtaskModel::TABLE.' WHERE '.SubtaskModel::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
                 '(SELECT COUNT(*) FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id) AS nb_links',
                 '(SELECT COUNT(*) FROM '.TaskExternalLinkModel::TABLE.' WHERE '.TaskExternalLinkModel::TABLE.'.task_id = tasks.id) AS nb_external_links',
                 '(SELECT DISTINCT 1 FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id AND '.TaskLinkModel::TABLE.'.link_id = 9) AS is_milestone',
@@ -116,7 +114,6 @@ class TaskFinderModel extends Base
                 TaskModel::TABLE.'.recurrence_parent',
                 TaskModel::TABLE.'.recurrence_child',
                 TaskModel::TABLE.'.time_estimated',
-                TaskModel::TABLE.'.time_spent',
                 UserModel::TABLE.'.username AS assignee_username',
                 UserModel::TABLE.'.name AS assignee_name',
                 UserModel::TABLE.'.email AS assignee_email',
@@ -284,6 +281,7 @@ class TaskFinderModel extends Base
         return $this->db->table(TaskModel::TABLE)
             ->columns(
                 TaskModel::TABLE.'.*',
+                '(SELECT SUM(time_spent) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS time_spent',
                 CategoryModel::TABLE.'.name AS category_name',
                 SwimlaneModel::TABLE.'.name AS swimlane_name',
                 ProjectModel::TABLE.'.name AS project_name',

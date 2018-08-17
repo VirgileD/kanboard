@@ -43,6 +43,7 @@
     <?php endif ?>
 
     <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'tabindex' => 3)) ?>
+    <?= $this->comment->renderTimeSpentField($values, $errors, array('maxlength="6"', 'tabindex' => 4)) ?>
 
     <?= $this->modal->submitButtons(array(
         'submitLabel' => t('Send by email'),

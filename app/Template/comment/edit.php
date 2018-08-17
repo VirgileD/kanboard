@@ -6,6 +6,6 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->textEditor('comment', $values, $errors, array('autofocus' => true, 'required' => true)) ?>
-
+    <?= $this->comment->renderTimeSpentField($values, $errors, array('maxlength="6"')) ?>
     <?= $this->modal->submitButtons() ?>
 </form>

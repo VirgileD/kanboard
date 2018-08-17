@@ -19,7 +19,7 @@ class MeProcedure extends BaseProcedure
     {
         $userId = $this->userSession->getId();
 
-        return $this->taskListSubtaskAssigneeFormatter
+        return $this->taskListFormatter
             ->withQuery($this->taskFinderModel->getUserQuery($userId))
             ->withUserId($userId)
             ->format();

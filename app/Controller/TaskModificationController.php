@@ -27,24 +27,6 @@ class TaskModificationController extends BaseController
         $this->redirectAfterQuickAction($task);
     }
 
-    /**
-     * Set the start date automatically
-     *
-     * @access public
-     */
-    public function start()
-    {
-        $task = $this->getTask();
-        $values = ['id' => $task['id'], 'date_started' => time()];
-
-        if (! $this->helper->projectRole->canUpdateTask($task)) {
-            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
-        }
-
-        $this->taskModificationModel->update($values);
-        $this->redirectAfterQuickAction($task);
-    }
-
     protected function redirectAfterQuickAction(array $task)
     {
         switch ($this->request->getStringParam('redirect')) {

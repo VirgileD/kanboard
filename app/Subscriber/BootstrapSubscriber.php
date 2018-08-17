@@ -20,9 +20,6 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
         $this->timezoneModel->setCurrentTimezone();
         $this->actionManager->attachEvents();
 
-        if ($this->userSession->isLogged()) {
-            session_set('hasSubtaskInProgress', $this->subtaskStatusModel->hasSubtaskInProgress($this->userSession->getId()));
-        }
     }
 
     public function __destruct()

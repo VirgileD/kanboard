@@ -156,4 +156,28 @@ class DateHelper extends Base
     {
         return date('l', strtotime('next Monday +'.($day - 1).' days'));
     }
+
+    /**
+     * Get a number of hours as XdYh
+     *
+     * @access public
+     * @param  integer    $time_spent    nb of hours to translate
+     * @return string
+     */
+    public function spent($time_spent = 0)
+    {
+        if ($time_spent === 0) {
+            return '';
+        }
+        $days = intdiv($time_spent,8);
+        $hours = $time_spent % 8;
+        $time_spent = "";
+        if($days!=0) {
+         $time_spent .= $days."d";
+        }
+        if($hours!=0) {
+          $time_spent .= $hours."h";
+        }
+        return $time_spent;
+    }
 }

@@ -64,6 +64,7 @@ class CommentModel extends Base
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
+                self::TABLE.'.time_spent',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
                 UserModel::TABLE.'.email',
@@ -93,6 +94,7 @@ class CommentModel extends Base
                 self::TABLE.'.date_creation',
                 self::TABLE.'.date_modification',
                 self::TABLE.'.comment',
+                self::TABLE.'.time_spent',
                 self::TABLE.'.reference',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
@@ -151,7 +153,7 @@ class CommentModel extends Base
         $result = $this->db
                     ->table(self::TABLE)
                     ->eq('id', $values['id'])
-                    ->update(array('comment' => $values['comment'], 'date_modification' => time()));
+                    ->update(array('comment' => $values['time_spent'],'comment' => $values['time_spent'], 'date_modification' => time()));
 
         if ($result) {
             $this->queueManager->push($this->commentEventJob->withParams($values['id'], self::EVENT_UPDATE));

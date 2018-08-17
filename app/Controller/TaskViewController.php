@@ -40,7 +40,6 @@ class TaskViewController extends BaseController
         $this->response->html($this->helper->layout->app('task/public', array(
             'project' => $project,
             'comments' => $this->commentModel->getAll($task['id']),
-            'subtasks' => $this->subtaskModel->getAll($task['id']),
             'links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'task' => $task,
             'columns_list' => $this->columnModel->getList($task['project_id']),
@@ -61,7 +60,6 @@ class TaskViewController extends BaseController
     public function show()
     {
         $task = $this->getTask();
-        $subtasks = $this->subtaskModel->getAll($task['id']);
         $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
 
         $this->response->html($this->helper->layout->task('task/show', array(
@@ -70,7 +68,6 @@ class TaskViewController extends BaseController
             'files' => $this->taskFileModel->getAllDocuments($task['id']),
             'images' => $this->taskFileModel->getAllImages($task['id']),
             'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection),
-            'subtasks' => $subtasks,
             'internal_links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'external_links' => $this->taskExternalLinkModel->getAll($task['id']),
             'link_label_list' => $this->linkModel->getList(0, false),

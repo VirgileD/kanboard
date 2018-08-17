@@ -8,7 +8,17 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 109;
+const VERSION = 110;
+
+function version_110(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "comment" ADD COLUMN time_spent INTEGER DEFAULT 0');
+    $pdo->exec('ALTER TABLE `tasks` DROP COLUMN `time_spent`');
+    $pdo->exec('DROP TABLE `subtasks`');
+    $pdo->exec('DROP TABLE `subtask_time_tracking`');
+    $pdo->exec("DELETE FROM `settings` WHERE `option`='calendar_user_subtasks_time_tracking'");
+    $pdo->exec("DELETE FROM `settings` WHERE `option`='subtask_restriction'");
+}
 
 function version_109(PDO $pdo)
 {

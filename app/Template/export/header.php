@@ -4,9 +4,6 @@
         <li <?= $this->app->checkMenuSelection('ExportController', 'tasks') ?>>
             <?= $this->modal->replaceLink(t('Tasks'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
-        <li <?= $this->app->checkMenuSelection('ExportController', 'subtasks') ?>>
-            <?= $this->modal->replaceLink(t('Subtasks'), 'ExportController', 'subtasks', array('project_id' => $project['id'])) ?>
-        </li>
         <li <?= $this->app->checkMenuSelection('ExportController', 'transitions') ?>>
             <?= $this->modal->replaceLink(t('Task transitions'), 'ExportController', 'transitions', array('project_id' => $project['id'])) ?>
         </li>

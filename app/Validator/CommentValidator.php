@@ -92,7 +92,8 @@ class CommentValidator extends BaseValidator
             new Validators\Integer('task_id', t('This value must be an integer')),
             new Validators\Integer('user_id', t('This value must be an integer')),
             new Validators\MaxLength('reference', t('The maximum length is %d characters', 191), 191),
-            new Validators\Required('comment', t('Comment is required'))
+            new Validators\Required('comment', t('Comment is required'),
+            new Validators\Integer('time_spent', t('This value must be an integer')))
         );
     }
 }

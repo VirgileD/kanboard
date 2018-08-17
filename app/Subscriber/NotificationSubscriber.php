@@ -6,7 +6,6 @@ use Kanboard\Event\GenericEvent;
 use Kanboard\Model\TaskLinkModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\CommentModel;
-use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\TaskFileModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -24,9 +23,6 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             TaskModel::EVENT_MOVE_POSITION     => 'handleEvent',
             TaskModel::EVENT_MOVE_SWIMLANE     => 'handleEvent',
             TaskModel::EVENT_ASSIGNEE_CHANGE   => 'handleEvent',
-            SubtaskModel::EVENT_CREATE         => 'handleEvent',
-            SubtaskModel::EVENT_UPDATE         => 'handleEvent',
-            SubtaskModel::EVENT_DELETE         => 'handleEvent',
             CommentModel::EVENT_CREATE         => 'handleEvent',
             CommentModel::EVENT_UPDATE         => 'handleEvent',
             CommentModel::EVENT_DELETE         => 'handleEvent',

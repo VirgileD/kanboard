@@ -55,7 +55,7 @@
 
         <?php if (! empty($task['time_estimated']) || ! empty($task['time_spent'])): ?>
             <span class="task-time-estimated" title="<?= t('Time spent and estimated') ?>">
-                <?= $this->text->e($task['time_spent']) ?>/<?= $this->text->e($task['time_estimated']) ?>h
+                <?= $this->dt->spent($task['time_spent']) ?>/<?= $this->dt->spent($task['time_estimated']) ?>
             </span>
         <?php endif ?>
 
@@ -88,10 +88,6 @@
 
         <?php if (! empty($task['nb_external_links'])): ?>
             <?= $this->app->tooltipLink('<i class="fa fa-external-link fa-fw"></i>'.$task['nb_external_links'], $this->url->href('BoardTooltipController', 'externallinks', array('task_id' => $task['id'], 'project_id' => $task['project_id']))) ?>
-        <?php endif ?>
-
-        <?php if (! empty($task['nb_subtasks'])): ?>
-            <?= $this->app->tooltipLink('<i class="fa fa-bars fa-fw"></i>'.round($task['nb_completed_subtasks'] / $task['nb_subtasks'] * 100, 0).'%', $this->url->href('BoardTooltipController', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id']))) ?>
         <?php endif ?>
 
         <?php if (! empty($task['nb_files'])): ?>

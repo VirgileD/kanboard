@@ -45,7 +45,6 @@ class TaskStatusModel extends Base
      */
     public function close($task_id)
     {
-        $this->subtaskStatusModel->closeAll($task_id);
         return $this->changeStatus($task_id, TaskModel::STATUS_CLOSED, time(), TaskModel::EVENT_CLOSE);
     }
 

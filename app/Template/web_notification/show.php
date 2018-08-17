@@ -27,9 +27,7 @@
     <?php foreach ($notifications as $notification): ?>
     <div class="table-list-row table-border-left">
         <span class="table-list-title">
-            <?php if ($this->text->contains($notification['event_name'], 'subtask')): ?>
-                <i class="fa fa-tasks fa-fw"></i>
-            <?php elseif ($this->text->contains($notification['event_name'], 'task.move')): ?>
+            <?php if ($this->text->contains($notification['event_name'], 'task.move')): ?>
                 <i class="fa fa-arrows-alt fa-fw"></i>
             <?php elseif ($this->text->contains($notification['event_name'], 'task.overdue')): ?>
                 <i class="fa fa-calendar-times-o fa-fw"></i>

@@ -4,7 +4,7 @@
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to close the task "%s" as well as all subtasks?', $task['title']) ?>
+        <?= t('Do you really want to close the task "%s"?', $task['title']) ?>
     </p>
 
     <?= $this->modal->confirmButtons(

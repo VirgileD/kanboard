@@ -8,7 +8,17 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 118;
+const VERSION = 119;
+
+function version_119(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE comments ADD COLUMN time_spent INTEGER DEFAULT 0');
+   // $pdo->exec('ALTER TABLE `tasks` DROP COLUMN `time_spent`');
+    $pdo->exec('DROP TABLE `subtasks`');
+    $pdo->exec('DROP TABLE `subtask_time_tracking`');
+    $pdo->exec("DELETE FROM `settings` WHERE `option`='calendar_user_subtasks_time_tracking'");
+    $pdo->exec("DELETE FROM `settings` WHERE `option`='subtask_restriction'");
+}
 
 function version_118(PDO $pdo)
 {
@@ -1031,7 +1041,7 @@ function version_33(PDO $pdo)
 function version_32(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN date_started INTEGER");
-    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent NUMERIC DEFAULT 0");
+    //$pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent NUMERIC DEFAULT 0");
     $pdo->exec("ALTER TABLE tasks ADD COLUMN time_estimated NUMERIC DEFAULT 0");
 }
 
@@ -1198,12 +1208,12 @@ function version_18(PDO $pdo)
             title TEXT COLLATE NOCASE NOT NULL,
             status INTEGER DEFAULT 0,
             time_estimated NUMERIC DEFAULT 0,
-            time_spent NUMERIC DEFAULT 0,
             task_id INTEGER NOT NULL,
             user_id INTEGER,
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
         )"
     );
+    //time_spent NUMERIC DEFAULT 0,
 }
 
 function version_17(PDO $pdo)

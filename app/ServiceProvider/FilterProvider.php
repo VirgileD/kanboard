@@ -33,7 +33,6 @@ use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskReferenceFilter;
 use Kanboard\Filter\TaskScoreFilter;
 use Kanboard\Filter\TaskStatusFilter;
-use Kanboard\Filter\TaskSubtaskAssigneeFilter;
 use Kanboard\Filter\TaskSwimlaneFilter;
 use Kanboard\Filter\TaskTagFilter;
 use Kanboard\Filter\TaskTitleFilter;
@@ -186,15 +185,11 @@ class FilterProvider implements ServiceProviderInterface
                 )
                 ->withFilter(TaskMovedDateRangeFilter::getInstance()
                     ->setDateParser($c['dateParser'])
-                )                
+                )
                 ->withFilter(new TaskProjectFilter())
                 ->withFilter(new TaskReferenceFilter())
                 ->withFilter(new TaskScoreFilter())
                 ->withFilter(new TaskStatusFilter())
-                ->withFilter(TaskSubtaskAssigneeFilter::getInstance()
-                    ->setCurrentUserId($c['userSession']->getId())
-                    ->setDatabase($c['db'])
-                )
                 ->withFilter(new TaskSwimlaneFilter())
                 ->withFilter(TaskTagFilter::getInstance()
                     ->setDatabase($c['db'])

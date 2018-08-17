@@ -8,4 +8,5 @@
 <div class="activity-description">
     <p class="activity-task-title"><?= $this->text->e($task['title']) ?></p>
     <div class="markdown"><?= $this->text->markdown($comment['comment']) ?></div>
+    <div ><?= $this->dt->spent($comment['time_spent']) ?></div>
 </div>

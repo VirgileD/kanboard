@@ -21,8 +21,6 @@ use Kanboard\Api\Procedure\MeProcedure;
 use Kanboard\Api\Middleware\AuthenticationMiddleware;
 use Kanboard\Api\Procedure\ProjectProcedure;
 use Kanboard\Api\Procedure\ProjectPermissionProcedure;
-use Kanboard\Api\Procedure\SubtaskProcedure;
-use Kanboard\Api\Procedure\SubtaskTimeTrackingProcedure;
 use Kanboard\Api\Procedure\SwimlaneProcedure;
 use Kanboard\Api\Procedure\TaskMetadataProcedure;
 use Kanboard\Api\Procedure\TaskProcedure;
@@ -68,8 +66,6 @@ class ApiProvider implements ServiceProviderInterface
             ->withObject(new ProjectProcedure($container))
             ->withObject(new ProjectPermissionProcedure($container))
             ->withObject(new ProjectMetadataProcedure($container))
-            ->withObject(new SubtaskProcedure($container))
-            ->withObject(new SubtaskTimeTrackingProcedure($container))
             ->withObject(new SwimlaneProcedure($container))
             ->withObject(new TaskProcedure($container))
             ->withObject(new TaskLinkProcedure($container))

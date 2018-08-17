@@ -64,10 +64,6 @@ class TaskBulkChangePropertyController extends BaseController
                 $changes['time_estimated'] = $values['time_estimated'];
             }
 
-            if (isset($values['change_spent_time']) && $values['change_spent_time'] == 1) {
-                $changes['time_spent'] = $values['time_spent'];
-            }
-
             if (isset($values['change_score']) && $values['change_score'] == 1) {
                 $changes['score'] = $values['score'];
             }

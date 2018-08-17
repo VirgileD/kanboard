@@ -59,16 +59,6 @@ class ExportController extends BaseController
     }
 
     /**
-     * Subtask export
-     *
-     * @access public
-     */
-    public function subtasks()
-    {
-        $this->common('subtaskExport', 'export', t('Subtasks'), 'subtasks', t('Subtasks Export'));
-    }
-
-    /**
      * Daily project summary export
      *
      * @access public

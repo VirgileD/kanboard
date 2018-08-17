@@ -192,17 +192,6 @@ class UserSession extends Base
     }
 
     /**
-     * Return true if subtask list toggle is active
-     *
-     * @access public
-     * @return string
-     */
-    public function hasSubtaskListActivated()
-    {
-        return session_is_true('subtaskListToggle');
-    }
-
-    /**
      * Check is the user is connected
      *
      * @access public

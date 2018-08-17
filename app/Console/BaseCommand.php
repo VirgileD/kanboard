@@ -13,7 +13,6 @@ use Symfony\Component\Console\Command\Command;
  *
  * @property \PicoDb\Database                                   $db
  * @property \Kanboard\Validator\PasswordResetValidator         $passwordResetValidator
- * @property \Kanboard\Export\SubtaskExport                     $subtaskExport
  * @property \Kanboard\Export\TaskExport                        $taskExport
  * @property \Kanboard\Export\TransitionExport                  $transitionExport
  * @property \Kanboard\Model\NotificationModel                  $notificationModel

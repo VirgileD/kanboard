@@ -98,13 +98,13 @@
                     <?php if ($task['time_estimated']): ?>
                     <li>
                         <strong><?= t('Time estimated:') ?></strong>
-                        <span><?= t('%s hours', $task['time_estimated']) ?></span>
+                        <span><?= $this->dt->spent($task['time_estimated']) ?></span>
                     </li>
                     <?php endif ?>
                     <?php if ($task['time_spent']): ?>
                     <li>
                         <strong><?= t('Time spent:') ?></strong>
-                        <span><?= t('%s hours', $task['time_spent']) ?></span>
+                        <span><?= $this->dt->spent($task['time_spent']) ?></span>
                     </li>
                     <?php endif ?>
 
@@ -119,14 +119,6 @@
                             <span><?= $this->dt->datetime($task['date_due']) ?></span>
                         </li>
                     <?php endif ?>
-                    <li>
-                        <strong><?= t('Started:') ?></strong>
-                        <?php if ($task['date_started']): ?>
-                            <span><?= $this->dt->datetime($task['date_started']) ?></span>
-                        <?php elseif ($editable): ?>
-                            <span><?= $this->url->link(t('Start now'), 'TaskModificationController', 'start', ['task_id' => $task['id'], 'project_id' => $task['project_id']]) ?></span>
-                        <?php endif ?>
-                    </li>
                     <li>
                         <strong><?= t('Created:') ?></strong>
                         <span><?= $this->dt->datetime($task['date_creation']) ?></span>

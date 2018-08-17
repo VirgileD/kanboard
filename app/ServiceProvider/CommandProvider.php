@@ -17,7 +17,6 @@ use Kanboard\Console\ProjectDailyColumnStatsExportCommand;
 use Kanboard\Console\ProjectDailyStatsCalculationCommand;
 use Kanboard\Console\ResetPasswordCommand;
 use Kanboard\Console\ResetTwoFactorCommand;
-use Kanboard\Console\SubtaskExportCommand;
 use Kanboard\Console\TaskExportCommand;
 use Kanboard\Console\TaskOverdueNotificationCommand;
 use Kanboard\Console\TaskTriggerCommand;
@@ -46,7 +45,6 @@ class CommandProvider implements ServiceProviderInterface
     {
         $application = new Application('Kanboard', APP_VERSION);
         $application->add(new TaskOverdueNotificationCommand($container));
-        $application->add(new SubtaskExportCommand($container));
         $application->add(new TaskExportCommand($container));
         $application->add(new ProjectArchiveCommand($container));
         $application->add(new ProjectActivityArchiveCommand($container));

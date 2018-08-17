@@ -29,10 +29,6 @@
                 <?= $this->render('task_list/task_icons', array(
                     'task' => $task,
                 )) ?>
-
-                <?= $this->render('task_list/task_subtasks', array(
-                    'task' => $task,
-                )) ?>
             </div>
         <?php endforeach ?>
     </div>

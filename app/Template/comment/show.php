@@ -9,6 +9,9 @@
 
         <small class="comment-date"><?= t('Created at:') ?> <?= $this->dt->datetime($comment['date_creation']) ?></small>
         <small class="comment-date"><?= t('Updated at:') ?> <?= $this->dt->datetime($comment['date_modification']) ?></small>
+        <?php if (! empty($comment['time_spent'])): ?>
+            <strong class="comment-date"><?= t('Time spent:') ?> <?= $this->dt->spent($comment['time_spent']) ?></strong>
+        <?php endif ?>
     </div>
 
     <?php if (! isset($hide_actions)): ?>

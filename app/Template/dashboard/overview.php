@@ -78,11 +78,6 @@
                             'task' => $task,
                         )) ?>
 
-                        <?= $this->render('task_list/task_subtasks', array(
-                            'task'    => $task,
-                            'user_id' => $user['id'],
-                        )) ?>
-
                         <?= $this->hook->render('template:dashboard:task:footer', array('task' => $task)) ?>
                     </div>
                 <?php endforeach ?>
