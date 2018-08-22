@@ -166,8 +166,8 @@ class DateHelper extends Base
      */
     public function spent($time_spent = 0)
     {
-        if ($time_spent === 0) {
-            return '';
+        if (!$time_spent) {
+            return '0h';
         }
         $days = intdiv($time_spent,8);
         $hours = $time_spent % 8;

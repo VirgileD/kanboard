@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var bower = require('gulp-bower');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es');
 var sass = require('gulp-sass');
 
 var src = {
@@ -82,7 +82,7 @@ gulp.task('vendor', function() {
 gulp.task('js', function() {
     gulp.src(src.js)
         .pipe(concat('app.min.js'))
-        .pipe(uglify())
+        //.pipe(uglify.uglify())
         .pipe(gulp.dest(dist.js))
     ;
 });

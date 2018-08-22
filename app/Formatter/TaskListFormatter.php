@@ -27,4 +27,5 @@ class TaskListFormatter extends BaseFormatter implements FormatterInterface
 
         return $tasks;
     }
+
 }

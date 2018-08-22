@@ -4,47 +4,60 @@ namespace Kanboard\Analytic;
 
 use Kanboard\Core\Base;
 use Kanboard\Model\TaskModel;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\CommentModel;
 
-/**
- * Estimated/Spent Time Comparison
- *
- * @package  analytic
- * @author   Frederic Guillot
- */
-class EstimatedTimeComparisonAnalytic extends Base
-{
-    /**
-     * Build report
-     *
-     * @access public
-     * @param  integer   $project_id    Project id
-     * @return array
-     */
-    public function build($project_id)
-    {
-        $rows = $this->db->table(TaskModel::TABLE)
-            ->columns('SUM(time_estimated) AS time_estimated', 'SUM(time_spent) AS time_spent', 'is_active')
-            ->eq('project_id', $project_id)
-            ->groupBy('is_active')
-            ->findAll();
 
-        $metrics = array(
-            'open' => array(
-                'time_spent' => 0,
-                'time_estimated' => 0,
-            ),
-            'closed' => array(
-                'time_spent' => 0,
-                'time_estimated' => 0,
-            ),
-        );
+  /**
+  * Estimated/Spent Time Comparison by column
+  *
+  * @package  analytic
+  * @author   VD
+  */
+  class EstimatedTimeComparisonAnalytic extends Base
+  {
+  /**
+  * Build report
+  *
+  * @access public
+  * @param  integer   $project_id    Project id
+  * @return array
+  */
+  public function build($project_id)
+  {
+    $rows = $this->db
+        ->table(TaskModel::TABLE)
+        ->columns(
+          TaskModel::TABLE.'.id',
+          TaskModel::TABLE.'.title',
+          TaskModel::TABLE.'.date_due',
+          TaskModel::TABLE.'.date_started',
+          TaskModel::TABLE.'.project_id',
+          TaskModel::TABLE.'.color_id',
+          TaskModel::TABLE.'.priority',
+          '(SELECT SUM(time_spent) FROM '.CommentModel::TABLE.' WHERE task_id=tasks.id) AS time_spent',
+          TaskModel::TABLE.'.time_estimated',
+          ColumnModel::TABLE.'.title AS column_name'
+        )
+        ->eq(TaskModel::TABLE.'.project_id', $project_id)
+        ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
+        ->findAll();
 
-        foreach ($rows as $row) {
-            $key = $row['is_active'] == TaskModel::STATUS_OPEN ? 'open' : 'closed';
-            $metrics[$key]['time_spent'] = (float) $row['time_spent'];
-            $metrics[$key]['time_estimated'] = (float) $row['time_estimated'];
-        }
+    $metrics = array();
 
-        return $metrics;
+    foreach ($rows as $row) {
+      if(!isset($metrics[$row['column_name']])) {
+        $metrics[$row['column_name']] = array();
+      }
+      if(!isset($metrics[$row['column_name']]['time_estimated'])) {
+        $metrics[$row['column_name']]['time_estimated'] = 0;
+      }
+      $metrics[$row['column_name']]['time_estimated'] += (int) $row['time_estimated'];
+      if(!isset($metrics[$row['column_name']]['time_spent'])) {
+        $metrics[$row['column_name']]['time_spent'] = 0;
+      }
+      $metrics[$row['column_name']]['time_spent'] += (int) $row['time_spent'];
     }
+    return $metrics;
+  }
 }

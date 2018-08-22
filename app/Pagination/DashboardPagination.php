@@ -36,7 +36,8 @@ class DashboardPagination extends Base
                 ->setMax(15)
                 ->setOrder(TaskModel::TABLE.'.priority')
                 ->setDirection('DESC')
-                ->setFormatter($this->taskListSubtaskAssigneeFormatter->withUserId($userId))
+                //->setFormatter($this->taskListFormatter->withUserId($userId))
+                ->setFormatter($this->taskListFormatter)
                 ->setQuery($query)
                 ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks-'.$projectId);
 
